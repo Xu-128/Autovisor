@@ -110,3 +110,29 @@ class Config:
     @property
     def revise_speed_name(self) -> str:
         return f'''document.querySelector(".speedBox span").innerText = "X {self.limitSpeed}";'''
+
+    # --- auto-handle 相关属性 ---
+    @property
+    def deepseek_api_key(self) -> str:
+        self._read_config()
+        return self._config.get('deepseek', 'api_key', raw=True, fallback='')
+
+    @property
+    def deepseek_model(self) -> str:
+        self._read_config()
+        return self._config.get('deepseek', 'model', raw=True, fallback='deepseek-v4-pro')
+
+    def get_auto_handle_urls(self) -> list:
+        self._read_config()
+        urls = []
+        if not self._config.has_section('auto-handle-url'):
+            return urls
+        _options = self._config.options('auto-handle-url')
+        for _option in _options:
+            url = self._config.get('auto-handle-url', _option, raw=True)
+            matched = re.findall(self.course_match_rule, url)
+            if not matched:
+                print(f"\"{url.strip()}\"\n不是一个有效网址,将忽略该网址.")
+                continue
+            urls.append(url)
+        return urls

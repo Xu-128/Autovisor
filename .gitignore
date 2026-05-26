@@ -12,3 +12,6 @@ __pycache__/
 captcha/
 logs/
 ./preview/*
+src/
+.claude/
+CLAUDE.md

@@ -1,32 +1,11 @@
 ##  Autovisor
 
-**Github项目主页：**[CXRunfree/Autovisor](https://github.com/CXRunfree/Autovisor)
 
-------
-#### 2026/5/8 公告
+本项目改编自 [CXRunfree/Autovisor](https://github.com/CXRunfree/Autovisor)。
 
-本项目自设立以来已度过三年有余, 这期间受到了广大朋友们的喜爱与支持, 在此表示衷心的感谢~~
+额外加入了对于 **智慧共享课** 的作业做题支持，由 DeepSeek API 驱动，暂不兼容其余 AI。
 
-不过作者即将毕业, 很少使用zhs平台上课, 我想以后大概会停更吧！
-
-但终归是有源源不断的新人步入大学生活，同样要面对繁重的网课任务，所以我希望能有人fork这个项目，让它能在未来帮助更多同学！如果你能写出下一个衍生版，可以通过邮箱联系我，我会把优秀的仓库链接置顶！
-
----
-
-#### 2026/5/10 Autovisor-3.17.2 更新
-
-**本次更新:**
-
-- 修复了限时功能在安全验证期间未暂停计时的问题.
-
-**近期更新:**
-
-- 新增了对**登录Cookies过期**的自动检测, 避免直接进入播放页后白屏空转;
-- 优化了首次启动浏览器与运行时依赖加载的稳定性, 减少首次运行失败的情况;
-- 重构了日志系统, 并补充更详细的异常记录, 便于排查问题;
-- 优化了浏览器关闭时的处理逻辑, 手动关闭浏览器时不会再频繁打印误导性的报错信息;
-- 其他细节调整与代码优化, 提高整体稳定性;
-- 添加了一个好看的logo.
+请运行 `python auto_handle.py` 开始使用。
 
 ------
 
@@ -38,6 +17,7 @@
 
 **程序功能:**
 
+刷课模式：
 - **支持自动登录**
 - **自动通过滑块验证(可选)**
 - **自动播放和切换下一集**
@@ -50,7 +30,13 @@
 - 检测当前学习进度并后台实时更新
 - 根据当前时间自动设置背景颜色(白天/夜晚)
 - 完成章节时将提示已刷课时长
-- 各种自定义配置
+
+自动做题模式（NEW）：
+- **自动检测未完成作业**
+- **AI 驱动逐题作答（需要接入 DeepSeek API）**
+- **支持单选、多选、判断、填空**
+- 题目自动保存至本地 JSON
+- 作答确认后可选择是否自动提交
 
 #### 二、使用须知:
 
@@ -73,19 +59,31 @@
 
 4.运行 **Autovisor.exe**，会自动打开浏览器，进入网课界面后就能自动刷课了 !
 
-(如果未设置 **enableAutoCaptcha=True**, 则需要**手动完成**登录时的滑块验证)
+(如果未设置 **enableAutoCaptcha=True**, 则需要**手动完成**登录时的滑块验证)
+
+5.**自动做题功能（命令行运行）：**
+
+自动做题需要 Python 环境和 DeepSeek API Key，不支持打包后的 .exe。
+
+- 在 [deepseek] 中填写你的 API Key 和模型名称（推荐 deepseek-v4-flash）
+- 在 [auto-handle-url] 中添加课程作业页链接（支持多个 URL1/URL2/...）
+- 运行命令：
+
+```bash
+python auto_handle.py
+```
+
+程序会依次：登录 → 进入课程 → 检测未完成作业 → 逐题解析并调用 AI 作答 → 等待你确认后提交。
+
+配置文件 [auto-handle-url] 的 URL 格式：
+```
+https://ai-smart-course-student-pro.zhihuishu.com/singleCourse/taskAndExam/...
+```
 
 ------
 
-#### 三、发行版下载:
 
-Github: [Releases · CXRunfree/Autovisor (github.com)](https://github.com/CXRunfree/Autovisor/releases)
-
-网盘备用: [[蓝奏云\] Autovisor-for-windows](https://wwk.lanzouj.com/b05evsxif) 密码:492l
-
-这是已经打包好的程序, 若需要**源代码**请于Github项目主页下载.
-
-#### 四、常见问题 :
+#### 三、常见问题 :
 
 0.为什么解压后没有Autovisor.exe / 运行报错**缺失依赖文件**?
 

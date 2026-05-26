@@ -6,3 +6,5 @@ PyGetWindow~=0.0.9
 requests~=2.33.1
 Pillow~=10.1.0
 httpx~=0.28.1
+openai~=1.0
+sv-ttk~=2.6

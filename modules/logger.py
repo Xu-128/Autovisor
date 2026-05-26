@@ -63,7 +63,7 @@ class Logger:
 
     def save(self, inform=True):
         if inform:
-            print(f"\n日志文件已保存至: {self.filename}")
+            print(f"\n日志文件已保存至: {self.filename}", flush=True)
 
     def debug(self, msg):
         self.write_log(f"[DEBUG] {msg}\n")
@@ -73,7 +73,7 @@ class Logger:
             text = f"\r\n\033[32m[INFO]\033[0m {msg}"
         else:
             text = f"\r\033[32m[INFO]\033[0m {msg}"
-        print(text.ljust(50))
+        print(text.ljust(50), flush=True)
         self.write_log(f"[INFO] {msg}\n")
 
     def warn(self, msg, shift=False):
@@ -81,7 +81,7 @@ class Logger:
             text = f"\r\n\033[33m[WARN]\033[0m {msg}"
         else:
             text = f"\r\033[33m[WARN]\033[0m {msg}"
-        print(text.ljust(50))
+        print(text.ljust(50), flush=True)
         self.write_log(f"[WARN] {msg}\n")
 
     def error(self, msg, shift=False):
@@ -89,5 +89,5 @@ class Logger:
             text = f"\r\n\033[31m[ERROR]\033[0m {msg}"
         else:
             text = f"\r\033[31m[ERROR]\033[0m {msg}"
-        print(text.ljust(50))
+        print(text.ljust(50), flush=True)
         self.write_log(f"[ERROR] {msg}\n")
