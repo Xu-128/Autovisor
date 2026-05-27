@@ -5,7 +5,7 @@
 
 额外加入了对于 **智慧共享课** 的作业做题支持，由 DeepSeek API 驱动，暂不兼容其余 AI。
 
-请运行 `python auto_handle.py` 开始使用。
+请运行 `python auto_handle.py` 并在 `config.ini` 中填写相关字段开始使用。
 
 ------
 
